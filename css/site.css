@@ -131,8 +131,16 @@ section { position: relative; }
 
 .credit { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
 .credit strong { color: var(--off); font-weight: 600; letter-spacing: .14em; }
-.hero-credit { margin-top: 2.25rem; display: inline-flex; align-items: center; gap: .9rem; }
-.hero-credit::before { content: ""; width: 2.5rem; height: 1px; background: var(--rosa); }
+.hero-credit { margin-top: 2.5rem; display: inline-grid; gap: .55rem; padding: 1.1rem 1.5rem 1.2rem; border-radius: 16px; text-decoration: none;
+  border: 1px solid rgba(247,244,239,.16); background: linear-gradient(140deg, rgba(247,244,239,.09), rgba(247,244,239,.02));
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 20px 50px -25px rgba(0,0,0,.8); transition: border-color .4s, background .4s; }
+.hero-credit:hover { border-color: rgba(244,181,190,.5); background: linear-gradient(140deg, rgba(244,181,190,.16), rgba(247,244,239,.03)); }
+.hero-credit-label { font-size: .68rem; letter-spacing: .26em; text-transform: uppercase; color: var(--rosa); }
+.hero-credit-logo { display: flex; align-items: baseline; gap: .7rem; color: var(--off); }
+.hero-credit-logo img { height: 2.6rem; width: auto; }
+.britto-word { font-family: var(--sans); font-weight: 600; font-size: clamp(1.6rem, 2.6vw, 2.2rem); letter-spacing: .06em; line-height: 1; }
+.britto-word i { font-style: normal; color: var(--rosa); }
+.britto-group { font-size: .78rem; font-weight: 500; letter-spacing: .42em; color: var(--muted); }
 
 /* ---------- manifesto ---------- */
 .manifesto { padding-block: clamp(6rem, 14vw, 11rem); background: linear-gradient(180deg, var(--ink), var(--ink-2)); }
