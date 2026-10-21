@@ -1,5 +1,15 @@
 [
  {
+  "arquivo": "loja-escultura-simbolo.webp",
+  "titulo": "Loja com o símbolo em escultura",
+  "grupo": "Ambientação"
+ },
+ {
+  "arquivo": "letreiro-fachada.webp",
+  "titulo": "Letreiro em relevo na parede",
+  "grupo": "Sinalização"
+ },
+ {
   "arquivo": "cartao-envelope-selo.webp",
   "titulo": "Cartão e envelope com selo de cera",
   "grupo": "Papelaria"
@@ -10,13 +20,23 @@
   "grupo": "Embalagens"
  },
  {
+  "arquivo": "timbrado-envelope.webp",
+  "titulo": "Papel timbrado e envelope",
+  "grupo": "Papelaria"
+ },
+ {
+  "arquivo": "stories-moldura.webp",
+  "titulo": "Story com moldura da marca",
+  "grupo": "Redes sociais"
+ },
+ {
   "arquivo": "camisetas-peito-costas.webp",
   "titulo": "Camisetas: logo no peito e nas costas",
   "grupo": "Uniformes"
  },
  {
-  "arquivo": "timbrado-envelope.webp",
-  "titulo": "Papel timbrado e envelope",
-  "grupo": "Papelaria"
+  "arquivo": "uniformes-polo-avental.webp",
+  "titulo": "Polos e avental",
+  "grupo": "Uniformes"
  }
 ]
