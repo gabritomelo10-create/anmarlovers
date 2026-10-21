@@ -350,31 +350,38 @@ $$('.tilt').forEach(el => tilt(el));
   if (!reduced) gsap.from('.studio-view', { scale: .9, opacity: 0, y: 60, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '.studio-view', start: 'top 85%' } });
 })();
 
-// ---------- mockups fotográficos do kit (aparecem quando os arquivos estão em assets/mockups) ----------
+// ---------- mockups fotográficos: assets/mockups/lista.json lista arquivo, título e grupo ----------
 (async function shots() {
-  const LIST = [
-    ['papelaria-e-embalagens', 'Papelaria e embalagens'], ['uniformes-polo-avental', 'Uniformes: polo e avental'],
-    ['EXEMPLOS DE EMBALAGENS', 'Exemplos de embalagens'], ['V1 - Vermelha', 'Camiseta vermelha'], ['V2 - Branca e Vermelha', 'Camiseta branca e vermelha'], ['V3 - Preta', 'Camiseta preta'],
-    ['AnMar-Lovers-ativacao-01-vista-geral', 'Ativação: vista geral'], ['AnMar-Lovers-ativacao-02-perspectiva', 'Ativação: perspectiva'],
-    ['AnMar-Lovers-ativacao-03-experimentacao', 'Ativação: experimentação'], ['AnMar-Lovers-ativacao-04-roleta', 'Ativação: roleta'],
-    ['modelos-posts', 'Modelos de posts'], ['modelos-stories', 'Modelos de stories'], ['Catalogo-molduras', 'Molduras para stories'],
-    ['01', 'Brandbook: capa'], ['CORES', 'Brandbook: cores'], ['TIPOGRAFIA', 'Brandbook: tipografia'], ['PATTERN', 'Brandbook: pattern'], ['ICONOGRAFIA', 'Brandbook: iconografia'], ['DESTAQUES', 'Brandbook: destaques']
-  ];
-  // assets/mockups/lista.json traz os nomes dos arquivos já otimizados que estão na pasta
-  let files = [];
-  try { const r = await fetch('assets/mockups/lista.json'); if (r.ok) files = await r.json(); } catch {}
-  const have = new Map(files.map(f => [f.replace(/\.[a-z0-9]+$/i, ''), f]));
-  const found = LIST.filter(([n]) => have.has(n)).map(([n, t]) => [`assets/mockups/${encodeURIComponent(have.get(n))}`, t]);
-  if (!found.length) return;
+  let items = [];
+  try { const r = await fetch('assets/mockups/lista.json'); if (r.ok) items = await r.json(); } catch {}
+  if (!items.length) return;
   const sec = $('#mockups'), track = $('#shotsTrack'); sec.hidden = false;
-  found.forEach(([u, t]) => {
+  $('#shotsCount').textContent = String(items.length).padStart(2, '0');
+  items.forEach(({ arquivo, titulo, grupo }, i) => {
+    const u = `assets/mockups/${encodeURIComponent(arquivo)}`;
     const b = document.createElement('button'); b.type = 'button'; b.className = 'shot';
-    b.innerHTML = `<div class="shot-frame"><img src="${u}" alt="${t}" loading="lazy"></div><p>${t}</p>`;
-    b.addEventListener('click', () => { $('#lbImg').src = u; $('#lbImg').alt = t; $('#lbCap').textContent = t; $('#lightbox').hidden = false; });
+    b.innerHTML = `<span class="shot-frame"><img src="${u}" alt="${titulo}" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async"><span class="shot-sheen"></span></span>
+      <span class="shot-cap"><span class="shot-n">${String(i + 1).padStart(2, '0')}</span><span class="shot-t">${titulo}</span><span class="shot-g">${grupo || ''}</span></span>`;
+    b.addEventListener('click', () => { $('#lbImg').src = u; $('#lbImg').alt = titulo; $('#lbCap').textContent = titulo; $('#lightbox').hidden = false; });
+    b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); b.style.setProperty('--mx', (e.clientX - r.left) / r.width * 100 + '%'); b.style.setProperty('--my', (e.clientY - r.top) / r.height * 100 + '%'); });
     track.appendChild(b);
   });
-  $('#lbClose').addEventListener('click', () => $('#lightbox').hidden = true);
-  $('#lightbox').addEventListener('click', e => { if (e.target.id === 'lightbox') $('#lightbox').hidden = true; });
+  const close = () => $('#lightbox').hidden = true;
+  $('#lbClose').addEventListener('click', close);
+  $('#lightbox').addEventListener('click', e => { if (e.target.id === 'lightbox') close(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+
+  const mm = gsap.matchMedia();
+  mm.add('(min-width: 760px) and (prefers-reduced-motion: no-preference)', () => {
+    const dist = () => track.scrollWidth - innerWidth;
+    const tw = gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: '.shots-pin', pin: true, start: 'top top', end: () => '+=' + dist() * 1.1, scrub: 1, invalidateOnRefresh: true,
+      onUpdate: s => { $('#shotsBar').style.transform = `scaleX(${s.progress})`; } } });
+    $$('.shot', track).forEach(sh => {
+      gsap.fromTo($('img', sh), { xPercent: -12 }, { xPercent: 0, ease: 'none', scrollTrigger: { trigger: sh, containerAnimation: tw, start: 'left right', end: 'right left', scrub: true } });
+      gsap.fromTo(sh, { rotateY: -14, scale: .9, opacity: .4 }, { rotateY: 0, scale: 1, opacity: 1, ease: 'power2.out', scrollTrigger: { trigger: sh, containerAnimation: tw, start: 'left 95%', end: 'left 45%', scrub: true } });
+    });
+  });
+  if (!reduced) gsap.from('.shots-head > *', { y: 40, opacity: 0, stagger: .1, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '#mockups', start: 'top 70%' } });
   ScrollTrigger.refresh();
 })();
 

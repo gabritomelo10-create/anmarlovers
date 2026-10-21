@@ -1,1 +1,22 @@
-[]
+[
+ {
+  "arquivo": "cartao-envelope-selo.webp",
+  "titulo": "Cartão e envelope com selo de cera",
+  "grupo": "Papelaria"
+ },
+ {
+  "arquivo": "presente-tag-fita.webp",
+  "titulo": "Presente com tag e fita de cetim",
+  "grupo": "Embalagens"
+ },
+ {
+  "arquivo": "camisetas-peito-costas.webp",
+  "titulo": "Camisetas: logo no peito e nas costas",
+  "grupo": "Uniformes"
+ },
+ {
+  "arquivo": "timbrado-envelope.webp",
+  "titulo": "Papel timbrado e envelope",
+  "grupo": "Papelaria"
+ }
+]
