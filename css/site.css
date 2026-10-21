@@ -129,6 +129,11 @@ section { position: relative; }
   .hero-foot { justify-content: center; }
 }
 
+.credit { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.credit strong { color: var(--off); font-weight: 600; letter-spacing: .14em; }
+.hero-credit { margin-top: 2.25rem; display: inline-flex; align-items: center; gap: .9rem; }
+.hero-credit::before { content: ""; width: 2.5rem; height: 1px; background: var(--rosa); }
+
 /* ---------- manifesto ---------- */
 .manifesto { padding-block: clamp(6rem, 14vw, 11rem); background: linear-gradient(180deg, var(--ink), var(--ink-2)); }
 .manifesto-text { font-family: var(--serif); font-size: clamp(1.75rem, 4.2vw, 3.6rem); line-height: 1.18; margin-top: 2rem; max-width: 22em; }

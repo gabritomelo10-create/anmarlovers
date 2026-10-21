@@ -118,7 +118,7 @@ import('./hero3d.js').then(({ initHero }) => {
 if (!reduced) {
   const chars = splitChars($('.hero-title'));
   gsap.from(chars, { yPercent: 110, rotate: 8, opacity: 0, duration: 1.2, ease: 'expo.out', stagger: .035, delay: .2 });
-  gsap.from('.hero-kicker, .hero-sub, .hero-actions, .hero-foot', { y: 30, opacity: 0, duration: 1.2, ease: 'expo.out', stagger: .1, delay: .7 });
+  gsap.from('.hero-kicker, .hero-sub, .hero-actions, .hero-credit, .hero-foot', { y: 30, opacity: 0, duration: 1.2, ease: 'expo.out', stagger: .1, delay: .7 });
   gsap.to('.hero-in', { yPercent: -25, opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 }
 ScrollTrigger.create({ trigger: '.hero', start: 'top top', end: 'bottom top', onUpdate: s => hero?.setScroll(s.progress) });
